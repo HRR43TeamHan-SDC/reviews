@@ -18,6 +18,7 @@ app.listen(PORT, () => {
 //   res.status(200).end();
 // });
 
+// get all reviews attributed to the restraunt with ?id=restaurantId
 app.get('/:restaurantId/', (req, res) => {
   Review.find(req.params).sort('-dineDate')
     .then((data) => {
@@ -27,6 +28,7 @@ app.get('/:restaurantId/', (req, res) => {
       console.log('error getting data from database ', err);
     });
 });
+
 
 app.get('/sort/:id/:sorting/:list/', (req, res) => {
   const list = JSON.parse(req.params.list);
@@ -51,4 +53,16 @@ app.get('/sort/:id/:sorting/:list/', (req, res) => {
         console.log('error getting data from database ', err);
       });
   }
+});
+
+app.post('route', (req, res) => {
+
+});
+
+app.put('route', (req, res) => {
+
+});
+
+app.delete('route', (req, res) => {
+
 });

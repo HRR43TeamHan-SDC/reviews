@@ -55,14 +55,39 @@ app.get('/sort/:id/:sorting/:list/', (req, res) => {
   }
 });
 
-app.post('route', (req, res) => {
+// CREATE a new review
+app.post('/:restaurantId/', (req, res) => {
+  var review = new Review;
+  review.restaurantId = req.params.restaurantId;
+  review.firstName = req.body.firstName;
+  review.lastName = req.body.lastName;
+  review.city = req.body.city;
+  review.numReviews = req.body.numReviews;
+  review.overall = req.body.overall;
+  review.food = req.body.food;
+  review.service = req.body.service;
+  review.ambience = req.body.ambience;
+  review.dineDate = req.body.dineDate;
+  review.noise = req.body.noise;
+  review.recommend = req.body.recommend;
+  review.comments = req.body.comments;
+  review.filterTag = req.body.filterTag;
+  review.vip = req.body.vip;
+  review.color = req.body.color;
+  console.log(review);
 
+  review.save((err) => {
+    if(err) console.log(err);
+    res.sendStatus(201);
+  })
 });
 
-app.put('route', (req, res) => {
-
+// UPDATE a review
+app.put('/:restaurantId/:reviewId', (req, res) => {
+  Review.put({})
 });
 
-app.delete('route', (req, res) => {
+app.delete('/:restaurantId/:reviewId', (req, res) => {
+  Review.deleteOne({ reviewId: req.params.reviewId })
 
 });

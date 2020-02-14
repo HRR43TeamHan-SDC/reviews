@@ -55,7 +55,7 @@ app.get('/sort/:id/:sorting/:list/', (req, res) => {
   }
 });
 
-// CREATE a new review
+// CREATE a restaurant review
 app.post('/:restaurantId/', (req, res) => {
   var review = new Review;
   review.restaurantId = req.params.restaurantId;
@@ -74,20 +74,48 @@ app.post('/:restaurantId/', (req, res) => {
   review.filterTag = req.body.filterTag;
   review.vip = req.body.vip;
   review.color = req.body.color;
-  console.log(review);
 
   review.save((err) => {
-    if(err) console.log(err);
-    res.sendStatus(201);
+    if (err) console.log(err);
+    res.sendStatus(201)
+  });
+});
+
+// UPDATE a given restaurant review
+app.put('/:reviewId', (req, res) => {
+  Review.updateOne({ _id: req.params.reviewId }, req.body, (error, result) => {
+    if (error) {
+      console.log('error put request', error);
+      res.sendStatus(404);
+    } else {
+      res.json(result);
+    };
   })
 });
 
-// UPDATE a review
-app.put('/:restaurantId/:reviewId', (req, res) => {
-  Review.put({})
+// UPDATE a given restaurant revierw
+// app.put('/:reviewId', (req, res) => {
+//   Review.updateOne({ _id: req.params.reviewId }, req.body)
+//   .then((result) => {
+//     res.json(result)
+//   })
+//   .catch((error) => {
+//     console.log('There was an error updating the requested review', error)
+//     res.sendStatus(404)
+//   });
+// });
+
+// DELETE a given restaurant review
+app.delete('/:reviewId', (req, res) => {
+  Review.deleteOne({ _id: req.params.reviewId })
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((error) => {
+      console.log('There was an error deleting the requested restaurant review', error)
+      res.sendStatus(404)
+    });
 });
 
-app.delete('/:restaurantId/:reviewId', (req, res) => {
-  Review.deleteOne({ reviewId: req.params.reviewId })
 
-});
+

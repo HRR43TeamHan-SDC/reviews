@@ -15,11 +15,11 @@ const jabber = new Jabber(buzzWords, 2);
 const variables = {
   numRestaurants: 30000,
   totalNumRecordsToWrite: 10000000,
-  recordsToGenerateEachTime: 5000,
+  recordsToGenerateEachTime: 10000,
 }
 
 const csvWriter = createCsvWriter({
-  path: './data.csv',
+  path: './currentDatabaseData.csv',
   header: [
       {id: 'restaurantId', title: 'restaurantId'},
       {id: 'firstName', title: 'firstName'},
@@ -42,7 +42,7 @@ const csvWriter = createCsvWriter({
 
 let generateRecords = () => {
   let records = [];
-  if(records.length < variables.recordsToGenerateEachTime + 1) {
+  while (records.length < variables.recordsToGenerateEachTime) {
     records.push({
       restaurantId: Math.floor(Math.random() * variables.numRestaurants),
       firstName: faker.name.firstName(),
@@ -60,8 +60,7 @@ let generateRecords = () => {
       filterTag: tags[Math.floor(Math.random() * tags.length)],
       vip: Math.random() < 0.3,
       color: circleColors[Math.floor(Math.random() * circleColors.length)],
-    })
-    generateRecords();
+    });
   }
   return records;
 }
@@ -72,10 +71,15 @@ let writeRecords = () => {
     let recordsToWrite = generateRecords();
     csvWriter.writeRecords(recordsToWrite)
     .then(() => {
+      console.log(`Good work! You have created ${recordsWritten} records!`)
       recordsWritten += recordsToWrite.length
       writeRecords()
     });
   } else {
+    console.timeEnd('writeRecords')
     console.log(`SUCCESS! You generated ${variables.totalNumRecordsToWrite} records!!!`)
   }
 }
+
+console.time('writeRecords');
+writeRecords();

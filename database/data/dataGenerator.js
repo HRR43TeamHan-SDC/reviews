@@ -19,7 +19,7 @@ const variables = {
 }
 
 const csvWriter = createCsvWriter({
-  path: './data3.csv',
+  path: './currentDatabaseData.csv',
   header: [
       {id: 'restaurantId', title: 'restaurantId'},
       {id: 'firstName', title: 'firstName'},
@@ -65,8 +65,6 @@ let generateRecords = () => {
   return records;
 }
 
-generateRecords()
-
 let recordsWritten = 0;
 let writeRecords = () => {
   if(recordsWritten < variables.totalNumRecordsToWrite) {
@@ -78,8 +76,10 @@ let writeRecords = () => {
       writeRecords()
     });
   } else {
+    console.timeEnd('writeRecords')
     console.log(`SUCCESS! You generated ${variables.totalNumRecordsToWrite} records!!!`)
   }
 }
 
+console.time('writeRecords');
 writeRecords();

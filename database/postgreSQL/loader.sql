@@ -17,4 +17,4 @@ COPY reviews (
   filter_tag,
   vip,
   color
-) FROM '/Users/johncharamonde/Desktop/HRR/SDC/reviews/database/data/data7.csv' CSV HEADER;
+) FROM '/Users/johncharamonde/Desktop/HRR/SDC/reviews/database/data/data8.csv' CSV HEADER;

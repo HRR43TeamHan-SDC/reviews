@@ -77,16 +77,16 @@ app.post('/:restaurantId/', (req, res) => {
 });
 
 // UPDATE a given restaurant review
-app.put('/:reviewId', (req, res) => {
-  Review.updateOne({ _id: req.params.reviewId }, req.body, (error, result) => {
-    if (error) {
-      console.log('error put request', error);
-      res.sendStatus(404);
-    } else {
-      res.json(result);
-    };
-  })
-});
+// app.put('/:reviewId', (req, res) => {
+//   Review.updateOne({ _id: req.params.reviewId }, req.body, (error, result) => {
+//     if (error) {
+//       console.log('error put request', error);
+//       res.sendStatus(404);
+//     } else {
+//       res.json(result);
+//     };
+//   })
+// });
 
 // UPDATE a given restaurant revierw
 // app.put('/:reviewId', (req, res) => {
@@ -101,16 +101,7 @@ app.put('/:reviewId', (req, res) => {
 // });
 
 // DELETE a given restaurant review
-app.delete('/:reviewId', (req, res) => {
-  Review.deleteOne({ _id: req.params.reviewId })
-    .then((result) => {
-      res.json(result)
-    })
-    .catch((error) => {
-      console.log('There was an error deleting the requested restaurant review', error)
-      res.sendStatus(404)
-    });
-});
+//
 
 
 

@@ -21,7 +21,7 @@ const variables = {
 }
 
 const csvWriter = createCsvWriter({
-  path: './database/data/data7.csv',
+  path: './database/data/data8.csv',
   header: [
       {id: 'review_id', title: 'review_id'},
       {id: 'restaurant_id', title: 'restaurant_id'},
@@ -109,5 +109,5 @@ COPY reviews (
   filter_tag,
   vip,
   color
-) FROM '${path.join(__dirname, '/data7.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
+) FROM '${path.join(__dirname, '/data8.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
 );

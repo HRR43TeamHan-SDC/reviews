@@ -10,7 +10,10 @@
     "build": "webpack",
     "build:dev": "webpack -w",
     "seedDB": "node database/seed.js",
-    "mongo": "sudo service mongod start"
+    "mongo": "sudo service mongod start",
+    "init:postgres": "psql -U postgres reviews -f ./database/postgreSQL/schema.sql",
+    "load:postgres": "psql -U postgres reviews -f ./database/postgreSQL/loader.sql",
+    "data": "node ./database/data/dataGenerator.js"
   },
   "repository": {
     "type": "git",

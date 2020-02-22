@@ -13,11 +13,6 @@ app.listen(PORT, () => {
   console.log('Listening on port ', PORT);
 });
 
-// app.get('/favicon.ico', (req, res) => {
-//   console.log('FAVICON LOOKUP');
-//   res.status(200).end();
-// });
-
 // get all reviews attributed to the restraunt with ?id=restaurantId
 app.get('/:restaurantId/', (req, res) => {
   Review.find(req.params).sort('-dineDate')

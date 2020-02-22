@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 const PORT = 3300;
-const Review = require('../database');
+const client = require('../database');
 var cors = require('cors');
 
 app.use(express.static('./public'));
@@ -15,66 +15,77 @@ app.listen(PORT, () => {
 
 // get all reviews attributed to the restraunt with ?id=restaurantId
 app.get('/:restaurantId/', (req, res) => {
-  Review.find(req.params).sort('-dineDate')
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      console.log('error getting data from database ', err);
-    });
-});
+  console.log('this is where you can look', typeof(parseInt(req.params.restaurantId)))
+  client.getAllReviews(parseInt(req.params.restaurantId), (error, results) => {
+    if(error) {
+      console.log('THE ERROR IS HERE IN SERVER INDEX.JS APP.GET!!!!!!!!!!!', error)
+    } else {
+      console.log('HELLO, this is what the result looks like...', results)
+    }
+  })
+})
 
 
-app.get('/sort/:id/:sorting/:list/', (req, res) => {
-  const list = JSON.parse(req.params.list);
-  let sortField = (req.params.sorting === 'Highest') ? '-overall' : 'overall';
-  if (req.params.sorting === 'Newest' || req.params.sorting === 0) {
-    sortField = '-dineDate';
-  }
-  if (!list.length && sortField !== '-dineDate') {
-    Review.find({ restaurantId: req.params.id }).sort(sortField).sort('-dineDate')
-      .then((data) => {
-        res.status(200).send(data);
-      })
-      .catch((err) => {
-        console.log('error getting data from database ', err);
-      });
-  } else {
-    Review.find({ restaurantId: req.params.id, filterTag: { $in: list } }).sort(sortField).sort('-dineDate')
-      .then((data) => {
-        res.status(200).send(data);
-      })
-      .catch((err) => {
-        console.log('error getting data from database ', err);
-      });
-  }
-});
+//     ).sort('-dineDate')
+//     .then((data) => {
+//       res.status(200).send(data);
+//     })
+//     .catch((err) => {
+//       console.log('error getting data from database ', err);
+//     });
+// });
+
+
+// app.get('/sort/:id/:sorting/:list/', (req, res) => {
+//   const list = JSON.parse(req.params.list);
+//   let sortField = (req.params.sorting === 'Highest') ? '-overall' : 'overall';
+//   if (req.params.sorting === 'Newest' || req.params.sorting === 0) {
+//     sortField = '-dineDate';
+//   }
+//   if (!list.length && sortField !== '-dineDate') {
+//     Review.find({ restaurantId: req.params.id }).sort(sortField).sort('-dineDate')
+//       .then((data) => {
+//         res.status(200).send(data);
+//       })
+//       .catch((err) => {
+//         console.log('error getting data from database ', err);
+//       });
+//   } else {
+//     Review.find({ restaurantId: req.params.id, filterTag: { $in: list } }).sort(sortField).sort('-dineDate')
+//       .then((data) => {
+//         res.status(200).send(data);
+//       })
+//       .catch((err) => {
+//         console.log('error getting data from database ', err);
+//       });
+//   }
+// });
 
 // CREATE a restaurant review
-app.post('/:restaurantId/', (req, res) => {
-  var review = new Review;
-  review.restaurantId = req.params.restaurantId;
-  review.firstName = req.body.firstName;
-  review.lastName = req.body.lastName;
-  review.city = req.body.city;
-  review.numReviews = req.body.numReviews;
-  review.overall = req.body.overall;
-  review.food = req.body.food;
-  review.service = req.body.service;
-  review.ambience = req.body.ambience;
-  review.dineDate = req.body.dineDate;
-  review.noise = req.body.noise;
-  review.recommend = req.body.recommend;
-  review.comments = req.body.comments;
-  review.filterTag = req.body.filterTag;
-  review.vip = req.body.vip;
-  review.color = req.body.color;
+// app.post('/:restaurantId/', (req, res) => {
+//   var review = new Review;
+//   review.restaurantId = req.params.restaurantId;
+//   review.firstName = req.body.firstName;
+//   review.lastName = req.body.lastName;
+//   review.city = req.body.city;
+//   review.numReviews = req.body.numReviews;
+//   review.overall = req.body.overall;
+//   review.food = req.body.food;
+//   review.service = req.body.service;
+//   review.ambience = req.body.ambience;
+//   review.dineDate = req.body.dineDate;
+//   review.noise = req.body.noise;
+//   review.recommend = req.body.recommend;
+//   review.comments = req.body.comments;
+//   review.filterTag = req.body.filterTag;
+//   review.vip = req.body.vip;
+//   review.color = req.body.color;
 
-  review.save((err) => {
-    if (err) console.log(err);
-    res.sendStatus(201)
-  });
-});
+//   review.save((err) => {
+//     if (err) console.log(err);
+//     res.sendStatus(201)
+//   });
+// });
 
 // UPDATE a given restaurant review
 // app.put('/:reviewId', (req, res) => {

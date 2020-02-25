@@ -1,26 +1,27 @@
+require('newrelic');
 const express = require('express');
 
 const app = express();
 const PORT = 3300;
 const client = require('../database');
 var cors = require('cors');
+const path = require('path');
 
 app.use(express.static('./public'));
 app.use(express.json());
 app.use(cors());
 
-app.listen(PORT, () => {
-  console.log('Listening on port ', PORT);
-});
+app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
+app.use('/:id', express.static(path.resolve(__dirname, '../public')));
 
 // get all reviews attributed to the restraunt with ?id=restaurantId
-app.get('/:restaurantId/', (req, res) => {
-  console.log('this is where you can look', typeof(parseInt(req.params.restaurantId)))
-  client.getAllReviews(parseInt(req.params.restaurantId), (error, results) => {
+app.get('/api/reviews/:restaurantId', (req, res) => {
+  client.getReviews(parseInt(req.params.restaurantId), (error, rows) => {
     if(error) {
-      console.log('THE ERROR IS HERE IN SERVER INDEX.JS APP.GET!!!!!!!!!!!', error)
+      console.log('ERROR! Failed to find the restaurant\'s reviews', error);
+      res.sendStatus(404);
     } else {
-      console.log('HELLO, this is what the result looks like...', results)
+      res.status(200).json(rows);
     }
   })
 })
@@ -115,4 +116,7 @@ app.get('/:restaurantId/', (req, res) => {
 //
 
 
+app.listen(PORT, () => {
+  console.log('Listening on port ', PORT);
+});
 

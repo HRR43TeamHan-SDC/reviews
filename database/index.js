@@ -17,17 +17,17 @@ client.connect()
   console.log('ERROR! Unable to connect to the database!')
 });
 
-const getAllReviews = (id, callback) => {
-  client.query(`SELECT * FROM reviews WHERE restaurant_id = $1`, [id], (error, results) => {
+const getReviews = (id, callback) => {
+  client.query(`SELECT review_id "reviewId", restaurant_id "restaurantId", first_name "firstName", last_name "lastName", city, num_reviews "numReviews", food, service, ambience, dine_date "dineDate", noise, recommend, comments, filter_tag "filterTag", vip, color FROM reviews WHERE restaurant_id = $1`, [id], (error, result) => {
     if(error) {
       callback(error);
     } else {
-      callback(results);
+      callback(null, result.rows);
     }
   })
 }
 
-module.exports.getAllReviews = getAllReviews
+module.exports.getReviews = getReviews
 // module.exports = getAllReviews
 
 

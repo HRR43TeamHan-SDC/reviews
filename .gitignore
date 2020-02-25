@@ -10,3 +10,4 @@ reactHooksSample.jsx
 coverage
 spec/__snapshot__
 database/data/datasets
+newrelic.js

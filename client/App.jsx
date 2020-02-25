@@ -10,10 +10,13 @@ const App = () => {
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('id');
+
+
+
+  const id = window.location.pathname.split('/')[1];
 
   useEffect(() => {
-    axios.get(`/${id}`)
+    axios.get(`/api/reviews/${id}`)
       .then((result) => {
         setReviews(result.data);
       })

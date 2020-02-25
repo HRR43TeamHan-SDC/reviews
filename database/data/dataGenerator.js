@@ -15,13 +15,13 @@ const jabber = new Jabber(buzzWords, 2);
 
 // MINDFULLY CHANGE THESE AS DESIRED
 const variables = {
-  numRestaurants: 100,
-  totalNumRecordsToWrite: 10000000,
+  numRestaurants: 10000000,
+  totalNumRecordsToWrite: 30000000,
   recordsToGenerateEachTime: 1000,
 }
 
 const csvWriter = createCsvWriter({
-  path: './database/data/data8.csv',
+  path: './database/data/data.csv',
   header: [
       {id: 'review_id', title: 'review_id'},
       {id: 'restaurant_id', title: 'restaurant_id'},
@@ -109,5 +109,5 @@ COPY reviews (
   filter_tag,
   vip,
   color
-) FROM '${path.join(__dirname, '/data8.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
+) FROM '${path.join(__dirname, '/data.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
 );

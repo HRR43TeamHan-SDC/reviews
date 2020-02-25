@@ -1,0 +1,27 @@
+config:
+  target: 'http://localhost:3300'
+  phases:
+    - duration: 30
+      arrivalRate: 10
+    - duration: 300
+      arrivalRate: 5
+      rampTo: 200
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        url: "/10"
+    - get:
+        url: "/100"
+    - get:
+        url: "/1000"
+    - get:
+        url: "/10000"
+    - get:
+        url: "/100000"
+    - get:
+        url: "/1000000"
+    - get:
+        url: "/10000000"

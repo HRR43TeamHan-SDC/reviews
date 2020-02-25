@@ -1,14 +1,12 @@
 # Reviews Service
 
 ## Installation
-```
-npm install
-npm run init:postgres
-npm run data
-npm run load:postgres
-npm build || npm run build:dev
-npm run start || npm run start:dev
-```
+1. `npm install`
+2. `npm run init:postgres`
+3. `npm run data`
+4. `npm run load:postgres`
+5. `npm build` || `npm run build:dev`
+6. `npm run start` || `npm run start:dev`
 
 ## Endpoints
 

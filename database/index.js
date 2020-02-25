@@ -18,7 +18,7 @@ client.connect()
 });
 
 const getReviews = (id, callback) => {
-  client.query(`SELECT review_id "reviewId", restaurant_id "restaurantId", first_name "firstName", last_name "lastName", city, num_reviews "numReviews", food, service, ambience, dine_date "dineDate", noise, recommend, comments, filter_tag "filterTag", vip, color FROM reviews WHERE restaurant_id = $1`, [id], (error, result) => {
+  client.query(`SELECT review_id "reviewId", restaurant_id "restaurantId", first_name "firstName", last_name "lastName", city, num_reviews "numReviews", food, service, ambience, dine_date "dineDate", noise, recommend, comments, filter_tag "filterTag", vip, color FROM reviews WHERE restaurant_id = $1 ORDER BY dine_date DESC`, [id], (error, result) => {
     if(error) {
       callback(error);
     } else {

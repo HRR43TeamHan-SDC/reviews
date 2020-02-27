@@ -1,9 +1,10 @@
 require('newrelic');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dovenv.config();
 const express = require('express');
 
 const app = express();
-const PORT = process.env.REVIEWS_HOST;
+const PORT = process.env.REVIEWS_HOST || 3300;
 const client = require('../database');
 var cors = require('cors');
 const path = require('path');

@@ -10,5 +10,5 @@ reactHooksSample.jsx
 coverage
 spec/__snapshot__
 database/data/datasets
-.env
+example.env
 .DS_store

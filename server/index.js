@@ -1,6 +1,6 @@
 require('newrelic');
 const dotenv = require('dotenv');
-dovenv.config();
+dotenv.config();
 const express = require('express');
 
 const app = express();

@@ -9,7 +9,7 @@ const client = require('../database');
 var cors = require('cors');
 const path = require('path');
 
-app.use(express.static('./public'));
+// app.use(express.static('./public'));
 app.use(express.json());
 app.use(cors());
 

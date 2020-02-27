@@ -1,8 +1,8 @@
 -- Table: public.reviews
 
-DROP TABLE public.reviews;
+DROP TABLE reviews;
 
-CREATE TABLE public.reviews
+CREATE TABLE reviews
 (
     review_id integer NOT NULL,
     restaurant_id integer,
@@ -35,5 +35,5 @@ CREATE INDEX i_restaurant_id
     TABLESPACE pg_default;
 
 
-ALTER TABLE public.reviews
+ALTER TABLE reviews
     OWNER to postgres;

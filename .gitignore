@@ -11,3 +11,5 @@ coverage
 spec/__snapshot__
 database/data/datasets
 newrelic.js
+.env
+.DS_store

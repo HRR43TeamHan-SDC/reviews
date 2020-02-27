@@ -21,7 +21,7 @@ const variables = {
 }
 
 const csvWriter = createCsvWriter({
-  path: './database/data/data.csv',
+  path: './database/data/data1m.csv',
   header: [
       {id: 'review_id', title: 'review_id'},
       {id: 'restaurant_id', title: 'restaurant_id'},
@@ -91,23 +91,5 @@ console.time('writeRecords');
 writeRecords();
 
 fs.writeFile('./database/postgreSQL/loader.sql', `
-COPY reviews (
-  review_id,
-  restaurant_id,
-  first_name,
-  last_name,
-  city,
-  num_reviews,
-  overall,
-  food,
-  service,
-  ambience,
-  dine_date,
-  noise,
-  recommend,
-  comments,
-  filter_tag,
-  vip,
-  color
-) FROM '${path.join(__dirname, '/data.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
+COPY reviews (review_id, restaurant_id, first_name, last_name, city, num_reviews, overall, food, service,ambience, dine_date, noise, recommend, comments, filter_tag, vip, color) FROM '${path.join(__dirname, '/data1m.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
 );

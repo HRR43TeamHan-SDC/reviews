@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 
 const app = express();
-const PORT = 3300;
+const PORT = process.env.REVIEWS_HOST;
 const client = require('../database');
 var cors = require('cors');
 const path = require('path');

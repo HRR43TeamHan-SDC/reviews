@@ -1,12 +1,12 @@
-// database code
 const { Client } = require('pg');
 
-// PostgreSQL
 const client = new Client({
-  user: 'postgres',
-  host: 'localhost',
+  user: process.env.POSTGRES_USER || 'postgres',
+  host: process.env.POSTGRES_HOST || 'localhost',
   database: 'reviews',
-  port: 5432,
+  password: process.env.POSTGRES_PSWD || 'password',
+  port: process.env.POSTGRES_PORT || 5432,
+  application_name: 'reviews_module',
 });
 
 client.connect()
@@ -28,10 +28,9 @@ const getReviews = (id, callback) => {
 }
 
 module.exports.getReviews = getReviews
-// module.exports = getAllReviews
 
 
-
+//MONGOOSE CODE
 
 // const mongoose = require('mongoose');
 // const reviewSchema = require('./schema.js');

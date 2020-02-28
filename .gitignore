@@ -1,6 +1,5 @@
 *.log
 node_modules
-public/*.js
 public/*.png
 public/*.otf
 .eslintrc.json
@@ -11,4 +10,4 @@ coverage
 spec/__snapshot__
 database/data/datasets
 example.env
-.DS_store
+.DS_storenpm

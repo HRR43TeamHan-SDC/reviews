@@ -16,12 +16,12 @@ const jabber = new Jabber(buzzWords, 2);
 // MINDFULLY CHANGE THESE AS DESIRED
 const variables = {
   numRestaurants: 10000000,
-  totalNumRecordsToWrite: 30000000,
+  totalNumRecordsToWrite: 10000000,
   recordsToGenerateEachTime: 1000,
 }
 
 const csvWriter = createCsvWriter({
-  path: './database/data/data1m.csv',
+  path: './database/data/data.csv',
   header: [
       {id: 'review_id', title: 'review_id'},
       {id: 'restaurant_id', title: 'restaurant_id'},
@@ -43,7 +43,7 @@ const csvWriter = createCsvWriter({
   ]
 });
 
-let id = 1;
+let id = 10000001;
 let generateRecords = () => {
   let records = [];
   while (records.length < variables.recordsToGenerateEachTime) {
@@ -91,5 +91,5 @@ console.time('writeRecords');
 writeRecords();
 
 fs.writeFile('./database/postgreSQL/loader.sql', `
-COPY reviews (review_id, restaurant_id, first_name, last_name, city, num_reviews, overall, food, service,ambience, dine_date, noise, recommend, comments, filter_tag, vip, color) FROM '${path.join(__dirname, '/data1m.csv')}' CSV HEADER;`, (err) => {if(err) throw err}
+\\COPY reviews (review_id, restaurant_id, first_name, last_name, city, num_reviews, overall, food, service,ambience, dine_date, noise, recommend, comments, filter_tag, vip, color) FROM '${path.join(__dirname, '/data.csv')}' CSV HEADER;\n`, (err) => {if(err) throw err}
 );
